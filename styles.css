@@ -1,3 +1,61 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body {
     background-color: rgb(231, 233, 235);
 }
+
+input:focus{
+    outline: none;
+}
+
+
+/*-----------------
+       Header
+-------------------*/
+
+header{
+    height: 8vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(198, 203, 207);
+    font-weight: bold;
+}
+
+.logo-container{
+    display: flex;
+    color: rgb(72, 75, 77);
+    text-decoration: none;
+}
+
+.logo {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+.measures{
+    margin: 0px 10px;
+}
+.measures-input{
+    width: 50px;
+}
+.import-export button{
+    width: 60px;
+    height: 25px;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(39, 212, 39);
+    border: 1px black solid;
+    margin: 0px 5px;
+    transition-duration: 0.5s;
+}
+.import-export button:hover{
+    cursor: pointer;
+    background-color: rgb(32, 170, 32);
+}
+
+
