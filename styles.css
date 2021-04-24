@@ -11,6 +11,22 @@ input:focus{
     outline: none;
 }
 
+main{
+    height: 92vh;
+}
+
+button {
+    font-weight: bold;
+    color: white;
+    padding: 3px 7px;
+    background-color: rgb(39, 212, 39);
+    transition-duration: 0.5s;
+}
+
+button:hover{
+    cursor: pointer;
+    background-color: rgb(32, 170, 32);
+}
 
 /*-----------------
        Header
@@ -44,18 +60,47 @@ header{
     width: 50px;
 }
 .import-export button{
-    width: 60px;
-    height: 25px;
-    font-weight: bold;
-    color: white;
-    background-color: rgb(39, 212, 39);
-    border: 1px black solid;
     margin: 0px 5px;
-    transition-duration: 0.5s;
 }
-.import-export button:hover{
-    cursor: pointer;
-    background-color: rgb(32, 170, 32);
+
+
+/*--------------
+    side bar
+--------------*/
+
+.sidebar{
+    height: 100%;
+    width: 15vw;
+    background-color: rgb(206, 209, 212);
+}
+
+.sidebar .title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1vw;
+    height: 10%;
+    border-bottom: 1px black solid;
+}
+
+.pallets-container{
+    height: 90%;
+    overflow: auto;
+}
+
+/*------------
+    paillet
+-------------*/
+
+.pallet{
+    background-color: rgb(109, 113, 117);
+    width: 100px;
+    margin: 5px;
+    height: 100px;
+    border: 3px solid rgb(51, 52, 54);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
