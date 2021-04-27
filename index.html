@@ -26,11 +26,11 @@
         </div>
         <div>
             <label class="measures">
-                L :
+                Length :
                 <input type="number" id="palletLong" class="measures-input" min="0">
             </label>
             <label class="measures">
-                l :
+                Width :
                 <input type="number" id="palletLarg" class="measures-input" min="0">
             </label>
         </div>
@@ -44,18 +44,42 @@
         <section class="sidebar">
             <div class="title">
                 <h3>Pallets</h3>
-                <button>Add Pallet</button>
+                <button id="addPalletBtn">Add Pallet</button>
+                <div id="showNewPalletPannel" class="add-new-pallet">
+                    <h3>New Pallet</h3>
+                    <table>
+                        <tr>
+                            <td>Name :</td>
+                            <td>
+                                <input type="text" id="newPalletName" class="measures-input">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Length :</td>
+                            <td>
+                                <input type="number" id="newPalletLength" class="measures-input" min="0"
+                                    placeholder="1">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Width :</td>
+                            <td>
+                                <input type="number" id="newPalletWidth" class="measures-input" min="0" placeholder="1">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button id="cancelBtn" class="cancel-btn">Cancel</button>
+                            </td>
+                            <td>
+                                <button id="addNewPallet">Add</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <div class="pallets-container">
-                <div class="pallet">
-                    <p>P1</p>
-                </div>
-                <div class="pallet">
-                    <p>P2</p>
-                </div>
-                <div class="pallet">
-                    <p>P3</p>
-                </div>
+            <div id="pailletContainer" class="pallets-container">
+
             </div>
         </section>
     </main>
