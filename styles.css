@@ -81,6 +81,7 @@ header{
     padding: 1vw;
     height: 10%;
     border-bottom: 1px black solid;
+    position: relative;
 }
 
 .pallets-container{
@@ -88,15 +89,37 @@ header{
     overflow: auto;
 }
 
+
+/*----------------------------
+    add new paillet div
+-----------------------------*/
+.add-new-pallet{
+    position: absolute;
+    top: 50px;
+    right: -80px;
+    background-color: rgb(245, 243, 243);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 15px;
+    display: none;
+}
+
+.add-new-pallet button {
+    margin-top: 10px;
+}
+
+.cancel-btn{
+    background-color: rgb(192, 57, 57);
+    margin-right: 10px;
+}
+
+
 /*------------
     paillet
 -------------*/
 
 .pallet{
     background-color: rgb(109, 113, 117);
-    width: 100px;
     margin: 5px;
-    height: 100px;
     border: 3px solid rgb(51, 52, 54);
     display: flex;
     justify-content: center;
