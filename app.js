@@ -9,8 +9,6 @@ const pailletContainer = document.getElementById('pailletContainer')
 
 var palletsSequence = 1;
 
-
-
 const containers = {
     "8ft": {
         length: 2.43,
@@ -30,6 +28,8 @@ const containers = {
     }
 }
 
+const pallets = {}
+
 const showAddPallet = e => {
     showNewPalletPannel.style.display = 'block'
     newPalletName.placeholder = 'P' + palletsSequence
@@ -44,27 +44,49 @@ const addNewPalletFct = e => {
     let length = newPalletLength.value > 0 ? newPalletLength.value : 1
     let width = newPalletWidth.value > 0 ? newPalletWidth.value : 1
 
-    //add new pallet
-    const newPallet = document.createElement('div')
-    const p = document.createElement('p')
-    p.innerText = name;
-    newPallet.appendChild(p)
-    newPallet.classList.add('pallet')
+    pallets[name] = { length, width }
 
-    newPallet.style.width = length * 100 + 'px'
-    newPallet.style.height = width * 100 + 'px'
+    //add new pallet
+    const newPallet = getPallet(name, length, width)
 
     pailletContainer.appendChild(newPallet)
 
-    //clear inputs
+    clearInputs()
+
+    closeNewPalletPannel()
+}
+
+const getPallet = (pName, pLength, pWidth) => {
+    const newPallet = document.createElement('div')
+    const p = document.createElement('p')
+    p.innerText = pName;
+    newPallet.appendChild(p)
+    newPallet.classList.add('pallet')
+
+    newPallet.style.width = pLength * 100 + 'px'
+    newPallet.style.height = pWidth * 100 + 'px'
+
+    return newPallet
+}
+
+const checkPalletName = e => {
+    if (pallets[e.target.value]) {
+        newPalletName.style.color = 'red'
+        addNewPallet.disabled = true
+    } else {
+        newPalletName.style.color = 'black'
+        addNewPallet.disabled = false
+    }
+}
+
+const clearInputs = () => {
     newPalletName.value = ''
     newPalletLength.value = ''
     newPalletWidth.value = ''
-
-    closeNewPalletPannel()
 }
 
 addPalletBtn.addEventListener('click', showAddPallet)
 addNewPallet.addEventListener('click', addNewPalletFct)
 cancelBtn.addEventListener('click', closeNewPalletPannel)
+newPalletName.addEventListener('input', checkPalletName)
 
