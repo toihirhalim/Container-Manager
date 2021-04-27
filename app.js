@@ -36,6 +36,7 @@ const showAddPallet = e => {
 }
 
 const closeNewPalletPannel = e => {
+    clearInputs();
     showNewPalletPannel.style.display = 'none'
 }
 
@@ -50,8 +51,6 @@ const addNewPalletFct = e => {
     const newPallet = getPallet(name, length, width)
 
     pailletContainer.appendChild(newPallet)
-
-    clearInputs()
 
     closeNewPalletPannel()
 }
@@ -83,6 +82,7 @@ const clearInputs = () => {
     newPalletName.value = ''
     newPalletLength.value = ''
     newPalletWidth.value = ''
+    addNewPallet.disabled = false
 }
 
 addPalletBtn.addEventListener('click', showAddPallet)
