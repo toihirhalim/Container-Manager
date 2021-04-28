@@ -124,6 +124,73 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+
+.pallet p {
+    color: rgb(245, 243, 243);
+    font-weight: bold;
+}
+
+.pallet .dimentions{
+    position: absolute;
+    font-size: 14px;
+}
+
+.side-line-container{
+    right: 5px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.bottom-line-container{
+    bottom: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.line{
+    background-color: black;
+    position: relative;
+}
+.side-line{
+    margin-left: 2px;
+    width: 1px;
+    height: 80%;
+}
+.bottom-line{
+    margin-top: 2px;
+    width: 80%;
+    height: 1px;
+    margin: auto;
+}
+
+.arrow {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+}
+.side-line .arrow-start{
+    top: 0;
+    left: -2px;
+    transform: rotate(135deg);
+}
+.side-line .arrow-end{
+    bottom: 0;
+    left: -2px;
+    transform: rotate(-45deg);
+}
+.bottom-line .arrow-start{
+    left: 0;
+    top: -2px;
+    transform: rotate(45deg);
+}
+.bottom-line .arrow-end{
+    right: 0;
+    top: -2px;
+    transform: rotate(-135deg);
 }
 
 
