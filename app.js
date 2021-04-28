@@ -37,7 +37,7 @@ const getPalletsAndDisplay = () => {
         pallets = p
         Object.keys(pallets).map(key => {
             let pallet = pallets[key]
-            const newPallet = getPallet(key, pallet.length, pallet.width)
+            const newPallet = generatePallet(key, pallet.length, pallet.width)
 
             pailletContainer.appendChild(newPallet)
         });
@@ -69,24 +69,11 @@ const addNewPalletFct = e => {
     setLocalObject('palletsSequence', palletsSequence)
 
     //add new pallet
-    const newPallet = getPallet(name, length, width)
+    const newPallet = generatePallet(name, length, width)
 
     pailletContainer.appendChild(newPallet)
 
     closeNewPalletPannel()
-}
-
-const getPallet = (pName, pLength, pWidth) => {
-    const newPallet = document.createElement('div')
-    const p = document.createElement('p')
-    p.innerText = pName;
-    newPallet.appendChild(p)
-    newPallet.classList.add('pallet')
-
-    newPallet.style.width = pLength * 100 + 'px'
-    newPallet.style.height = pWidth * 100 + 'px'
-
-    return newPallet
 }
 
 const checkPalletName = e => {
