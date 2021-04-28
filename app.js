@@ -28,7 +28,26 @@ const containers = {
     }
 }
 
-const pallets = {}
+var pallets = {}
+
+const getPalletsAndDisplay = () => {
+    const p = getLocalObject('pallets')
+
+    if (p) {
+        pallets = p
+        Object.keys(pallets).map(key => {
+            let pallet = pallets[key]
+            const newPallet = getPallet(key, pallet.length, pallet.width)
+
+            pailletContainer.appendChild(newPallet)
+        });
+    }
+}
+
+const getPalletsSequence = () => {
+    let index = getLocalObject('palletsSequence')
+    if (index) palletsSequence = index
+}
 
 const showAddPallet = e => {
     showNewPalletPannel.style.display = 'block'
@@ -46,6 +65,8 @@ const addNewPalletFct = e => {
     let width = newPalletWidth.value > 0 ? newPalletWidth.value : 1
 
     pallets[name] = { length, width }
+    setLocalObject('pallets', pallets)
+    setLocalObject('palletsSequence', palletsSequence)
 
     //add new pallet
     const newPallet = getPallet(name, length, width)
@@ -85,6 +106,10 @@ const clearInputs = () => {
     addNewPallet.disabled = false
 }
 
+getPalletsSequence()
+getPalletsAndDisplay()
+
+//events listenners
 addPalletBtn.addEventListener('click', showAddPallet)
 addNewPallet.addEventListener('click', addNewPalletFct)
 cancelBtn.addEventListener('click', closeNewPalletPannel)
