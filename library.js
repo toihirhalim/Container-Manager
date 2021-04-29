@@ -56,6 +56,11 @@ const generatePallet = (pName, pLength, pWidth) => {
     //close icon
     closeIcon.src = 'images/cancel.png'
     closeIcon.classList.add('close')
+    closeIcon.addEventListener('click', e => {
+        const pallet = e.target.parentNode
+        const palletContainer = pallet.parentNode
+        palletContainer.removeChild(pallet)
+    })
 
     // pallet
     newPallet.classList.add('pallet')

@@ -207,3 +207,6 @@ header{
     z-index: 2;
     width: 20px;
 }
+.close:hover{
+    cursor: pointer;
+}
