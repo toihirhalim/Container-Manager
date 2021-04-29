@@ -52,6 +52,7 @@ const getPalletsSequence = () => {
 const showAddPallet = e => {
     showNewPalletPannel.style.display = 'block'
     newPalletName.placeholder = 'P' + palletsSequence
+    addNewPallet.focus()
 }
 
 const closeNewPalletPannel = e => {
@@ -74,6 +75,7 @@ const addNewPalletFct = e => {
     pailletContainer.appendChild(newPallet)
 
     closeNewPalletPannel()
+    addPalletBtn.focus()
 }
 
 const checkPalletName = e => {
