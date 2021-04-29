@@ -87,6 +87,7 @@ header{
 .pallets-container{
     height: 90%;
     overflow: auto;
+    padding-top: 5px;
 }
 
 
@@ -101,6 +102,7 @@ header{
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     padding: 15px;
     display: none;
+    z-index: 1;
 }
 
 .add-new-pallet button {
@@ -193,4 +195,15 @@ header{
     transform: rotate(-135deg);
 }
 
-
+.close{
+    position: absolute;
+    background-color: rgb(243, 241, 241);
+    border-radius: 50%;
+    padding: 1px;
+    border: 2px solid black;
+    display: none;
+    top: -12px;
+    right: -12px;
+    z-index: 2;
+    width: 20px;
+}

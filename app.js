@@ -6,6 +6,7 @@ const newPalletLength = document.getElementById('newPalletLength')
 const newPalletWidth = document.getElementById('newPalletWidth')
 const newPalletName = document.getElementById('newPalletName')
 const pailletContainer = document.getElementById('pailletContainer')
+const palletsElements = document.getElementsByClassName('pallet')
 
 var palletsSequence = 1;
 
@@ -40,6 +41,9 @@ const getPalletsAndDisplay = () => {
             const newPallet = generatePallet(key, pallet.length, pallet.width)
 
             pailletContainer.appendChild(newPallet)
+
+            newPallet.addEventListener('mouseenter', showCloseIcon)
+            newPallet.addEventListener('mouseleave', hideCloseIcon)
         });
     }
 }
@@ -74,6 +78,9 @@ const addNewPalletFct = e => {
 
     pailletContainer.appendChild(newPallet)
 
+    newPallet.addEventListener('mouseenter', showCloseIcon)
+    newPallet.addEventListener('mouseleave', hideCloseIcon)
+
     closeNewPalletPannel()
     addPalletBtn.focus()
 }
@@ -95,6 +102,14 @@ const clearInputs = () => {
     addNewPallet.disabled = false
 }
 
+const showCloseIcon = e => {
+    e.target.lastChild.style.display = 'block'
+}
+
+const hideCloseIcon = e => {
+    e.target.lastChild.style.display = 'none'
+}
+
 getPalletsSequence()
 getPalletsAndDisplay()
 
@@ -102,5 +117,3 @@ getPalletsAndDisplay()
 addPalletBtn.addEventListener('click', showAddPallet)
 addNewPallet.addEventListener('click', addNewPalletFct)
 cancelBtn.addEventListener('click', closeNewPalletPannel)
-newPalletName.addEventListener('input', checkPalletName)
-
