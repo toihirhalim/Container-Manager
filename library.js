@@ -25,6 +25,7 @@ const generatePallet = (pName, pLength, pWidth) => {
     const sideLineArrowEnd = document.createElement('div')
     const bottomLineArrowStart = document.createElement('div')
     const bottomLineArrowEnd = document.createElement('div')
+    const closeIcon = document.createElement('img')
 
     // p
     p.innerText = pName;
@@ -52,12 +53,19 @@ const generatePallet = (pName, pLength, pWidth) => {
     bottomLine.appendChild(bottomLineArrowEnd)
     bottomLineContainer.appendChild(bottomLine)
 
+    //close icon
+    closeIcon.src = 'images/cancel.png'
+    closeIcon.classList.add('close')
+    closeIcon.addEventListener('click', deletePallet)
+
     // pallet
+    newPallet.id = pName
     newPallet.classList.add('pallet')
     newPallet.style.width = pLength * 100 + 'px'
     newPallet.style.height = pWidth * 100 + 'px'
     newPallet.appendChild(sideLineContainer)
     newPallet.appendChild(bottomLineContainer)
+    newPallet.appendChild(closeIcon)
 
     return newPallet
 }
