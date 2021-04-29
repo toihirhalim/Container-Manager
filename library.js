@@ -56,13 +56,10 @@ const generatePallet = (pName, pLength, pWidth) => {
     //close icon
     closeIcon.src = 'images/cancel.png'
     closeIcon.classList.add('close')
-    closeIcon.addEventListener('click', e => {
-        const pallet = e.target.parentNode
-        const palletContainer = pallet.parentNode
-        palletContainer.removeChild(pallet)
-    })
+    closeIcon.addEventListener('click', deletePallet)
 
     // pallet
+    newPallet.id = pName
     newPallet.classList.add('pallet')
     newPallet.style.width = pLength * 100 + 'px'
     newPallet.style.height = pWidth * 100 + 'px'

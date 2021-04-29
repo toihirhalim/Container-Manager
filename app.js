@@ -110,6 +110,23 @@ const hideCloseIcon = e => {
     e.target.lastChild.style.display = 'none'
 }
 
+const deletePallet = e => {
+    const pallet = e.target.parentNode
+    const palletContainer = pallet.parentNode
+
+    palletContainer.removeChild(pallet)
+
+    delete pallets[pallet.id]
+
+    setLocalObject('pallets', pallets)
+
+    if (Object.keys(pallets).length <= 0) {
+        palletsSequence = 1
+        setLocalObject('palletsSequence', palletsSequence)
+    }
+
+}
+
 getPalletsSequence()
 getPalletsAndDisplay()
 
