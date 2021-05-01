@@ -7,6 +7,7 @@ const newPalletWidth = document.getElementById('newPalletWidth')
 const newPalletName = document.getElementById('newPalletName')
 const pailletContainer = document.getElementById('pailletContainer')
 const palletsElements = document.getElementsByClassName('pallet')
+const selectContainer = document.getElementById('selectContainer')
 
 var palletsSequence = 1;
 
@@ -127,6 +128,10 @@ const deletePallet = e => {
 
 }
 
+const handleContainerChange = e => {
+    console.log(containers[e.target.value])
+}
+
 getPalletsSequence()
 getPalletsAndDisplay()
 
@@ -134,3 +139,4 @@ getPalletsAndDisplay()
 addPalletBtn.addEventListener('click', showAddPallet)
 addNewPallet.addEventListener('click', addNewPalletFct)
 cancelBtn.addEventListener('click', closeNewPalletPannel)
+selectContainer.addEventListener('input', handleContainerChange)
