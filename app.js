@@ -7,6 +7,7 @@ const newPalletWidth = document.getElementById('newPalletWidth')
 const newPalletName = document.getElementById('newPalletName')
 const pailletContainer = document.getElementById('pailletContainer')
 const palletsElements = document.getElementsByClassName('pallet')
+const containerPanel = document.getElementById('containerPanel')
 const selectContainer = document.getElementById('selectContainer')
 
 var palletsSequence = 1;
@@ -31,6 +32,15 @@ const containers = {
 }
 
 var pallets = {}
+
+const displayContainer = () => {
+    let type = getLocalObject('container')
+    if (!type) type = '20ft'
+    const container = generateContainer(containers[type].length, containers[type].width)
+
+    containerPanel.appendChild(container)
+    selectContainer.value = type
+}
 
 const getPalletsAndDisplay = () => {
     const p = getLocalObject('pallets')
@@ -129,9 +139,16 @@ const deletePallet = e => {
 }
 
 const handleContainerChange = e => {
-    console.log(containers[e.target.value])
+    let type = e.target.value
+
+    containerPanel.innerHTML = ''
+    const container = generateContainer(containers[type].length, containers[type].width)
+
+    containerPanel.appendChild(container)
+    setLocalObject('container', type)
 }
 
+displayContainer()
 getPalletsSequence()
 getPalletsAndDisplay()
 

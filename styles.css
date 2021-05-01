@@ -241,8 +241,6 @@ header{
 .container{
     background-color: rgb(190, 22, 22);
     border: 2px solid black;
-    width: 606px;
-    height: 244px;
     position: relative;
 }
 

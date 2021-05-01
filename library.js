@@ -38,13 +38,13 @@ const generateLine = (dimension, isSideLine) => {
     return lineContainer
 }
 
-const generatePallet = (pName, pLength, pWidth) => {
+const generatePallet = (name, length, width) => {
     const newPallet = document.createElement('div')
     const p = document.createElement('p')
     const closeIcon = document.createElement('img')
 
     // p
-    p.innerText = pName;
+    p.innerText = name;
     newPallet.appendChild(p)
 
     //close icon
@@ -53,13 +53,26 @@ const generatePallet = (pName, pLength, pWidth) => {
     closeIcon.addEventListener('click', deletePallet)
 
     // pallet
-    newPallet.id = pName
+    newPallet.id = name
     newPallet.classList.add('pallet')
-    newPallet.style.width = pLength * 100 + 'px'
-    newPallet.style.height = pWidth * 100 + 'px'
-    newPallet.appendChild(generateLine(pWidth, true))
-    newPallet.appendChild(generateLine(pLength, false))
+    newPallet.style.width = length * 100 + 'px'
+    newPallet.style.height = width * 100 + 'px'
+    newPallet.appendChild(generateLine(width, true))
+    newPallet.appendChild(generateLine(length, false))
     newPallet.appendChild(closeIcon)
 
     return newPallet
+}
+
+const generateContainer = (length, width) => {
+    const container = document.createElement('div')
+
+    container.classList.add('container')
+    container.style.width = length * 100 + 'px'
+    container.style.height = width * 100 + 'px'
+
+    container.appendChild(generateLine(width, true))
+    container.appendChild(generateLine(length, false))
+
+    return container
 }
