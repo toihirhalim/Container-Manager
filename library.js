@@ -67,5 +67,10 @@ const generatePallet = (pName, pLength, pWidth) => {
     newPallet.appendChild(bottomLineContainer)
     newPallet.appendChild(closeIcon)
 
+    //event listenners
+    newPallet.addEventListener('mouseenter', showCloseIcon)
+    newPallet.addEventListener('mouseleave', hideCloseIcon)
+    newPallet.addEventListener('click', setSelected)
+
     return newPallet
 }
