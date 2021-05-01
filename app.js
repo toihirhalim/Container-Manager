@@ -172,6 +172,7 @@ const updatePalletLength = e => {
     var length = e.target.value > 0 ? e.target.value : 1
     selectedPallet.style.width = length * 100 + "px"
     pallets[selectedPallet.id].length = length
+    selectedPallet.children[2].firstChild.innerText = length + "m"
     setLocalObject('pallets', pallets)
 }
 
@@ -181,6 +182,7 @@ const updatePalletWidth = e => {
     var width = e.target.value > 0 ? e.target.value : 1
     selectedPallet.style.height = width * 100 + "px"
     pallets[selectedPallet.id].width = width
+    selectedPallet.children[1].firstChild.innerText = width + "m"
     setLocalObject('pallets', pallets)
 }
 
