@@ -13,6 +13,7 @@ input:focus{
 
 main{
     height: 92vh;
+    display: flex;
 }
 
 button {
@@ -122,7 +123,7 @@ header{
 .pallet{
     background-color: rgb(109, 113, 117);
     margin: 5px;
-    border: 3px solid rgb(51, 52, 54);
+    border: 1px solid rgb(52, 54, 51);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -134,7 +135,7 @@ header{
     font-weight: bold;
 }
 
-.pallet .dimentions{
+.dimensions{
     position: absolute;
     font-size: 14px;
 }
@@ -209,4 +210,43 @@ header{
 }
 .close:hover{
     cursor: pointer;
+}
+
+
+/*------------------
+    container side
+--------------------*/
+
+.container-side{
+    width: 100%;
+    position: relative;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.select-container{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+
+/*---------------
+    container
+----------------*/
+
+.container{
+    background-color: rgb(190, 22, 22);
+    border: 2px solid black;
+    position: relative;
+}
+
+.container .side-line-container{
+    left: -50px;
+}
+.container .bottom-line-container{
+    top: -30px;
 }

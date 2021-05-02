@@ -21,17 +21,17 @@
         <div>
             <label>
                 Paillet :
-                <input type="text" id="palletName">
+                <input id="palletName" type="text" id="palletName">
             </label>
         </div>
         <div>
             <label class="measures">
                 Length :
-                <input type="number" id="palletLong" class="measures-input" min="0">
+                <input type="number" id="palletLength" class="measures-input" min="0">
             </label>
             <label class="measures">
                 Width :
-                <input type="number" id="palletLarg" class="measures-input" min="0">
+                <input type="number" id="palletWidth" class="measures-input" min="0">
             </label>
         </div>
         <div class="import-export">
@@ -78,9 +78,20 @@
                     </table>
                 </div>
             </div>
-            <div id="pailletContainer" class="pallets-container">
 
-            </div>
+            <div id="pailletContainer" class="pallets-container"></div>
+
+        </section>
+
+        <section class="container-side">
+            <div id="containerPanel"></div>
+
+            <select id="selectContainer" class="select-container">
+                <option value="8ft">8ft</option>
+                <option value="10ft">10ft</option>
+                <option value="20ft">20ft</option>
+                <option value="40ft">40ft</option>
+            </select>
         </section>
     </main>
 

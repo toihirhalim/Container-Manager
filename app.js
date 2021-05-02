@@ -6,7 +6,11 @@ const newPalletLength = document.getElementById('newPalletLength')
 const newPalletWidth = document.getElementById('newPalletWidth')
 const newPalletName = document.getElementById('newPalletName')
 const pailletContainer = document.getElementById('pailletContainer')
-const palletsElements = document.getElementsByClassName('pallet')
+const palletName = document.getElementById('palletName')
+const palletLength = document.getElementById('palletLength')
+const palletWidth = document.getElementById('palletWidth')
+const containerPanel = document.getElementById('containerPanel')
+const selectContainer = document.getElementById('selectContainer')
 
 var palletsSequence = 1;
 
@@ -31,6 +35,16 @@ const containers = {
 
 var pallets = {}
 
+var selectedPallet = null
+const displayContainer = () => {
+    let type = getLocalObject('container')
+    if (!type) type = '20ft'
+    const container = generateContainer(containers[type].length, containers[type].width)
+
+    containerPanel.appendChild(container)
+    selectContainer.value = type
+}
+
 const getPalletsAndDisplay = () => {
     const p = getLocalObject('pallets')
 
@@ -41,9 +55,6 @@ const getPalletsAndDisplay = () => {
             const newPallet = generatePallet(key, pallet.length, pallet.width)
 
             pailletContainer.appendChild(newPallet)
-
-            newPallet.addEventListener('mouseenter', showCloseIcon)
-            newPallet.addEventListener('mouseleave', hideCloseIcon)
         });
     }
 }
@@ -77,9 +88,6 @@ const addNewPalletFct = e => {
     const newPallet = generatePallet(name, length, width)
 
     pailletContainer.appendChild(newPallet)
-
-    newPallet.addEventListener('mouseenter', showCloseIcon)
-    newPallet.addEventListener('mouseleave', hideCloseIcon)
 
     closeNewPalletPannel()
     addPalletBtn.focus()
@@ -127,6 +135,82 @@ const deletePallet = e => {
 
 }
 
+const setSelected = e => {
+    var target = e.target
+
+    while (true) {
+        if (target.id) break
+        else target = target.parentNode
+    }
+
+    if (selectedPallet)
+        selectedPallet.style.borderColor = 'rgb(51, 52, 54)'
+
+    selectedPallet = target
+    selectedPallet.style.borderColor = 'rgb(157, 50, 10)'
+
+    var pallet = pallets[selectedPallet.id]
+
+    palletName.value = selectedPallet.id
+    palletLength.value = pallet.length
+    palletWidth.value = pallet.width
+}
+
+const isPalletSelected = e => {
+    if (selectedPallet)
+        return true
+    e.target.value = ''
+    return false
+}
+
+const updatePalletName = e => {
+    if (!(e.target.value && isPalletSelected(e))) return
+
+    if (pallets[e.target.value]) {
+        e.target.style.color = 'red'
+        return
+    }
+
+    e.target.style.color = 'black'
+    let pallet = pallets[selectedPallet.id]
+    delete pallets[selectedPallet.id]
+    selectedPallet.id = e.target.value
+    selectedPallet.firstChild.innerText = e.target.value
+    pallets[e.target.value] = pallet
+    setLocalObject('pallets', pallets)
+}
+
+const updatePalletLength = e => {
+    if (!isPalletSelected(e)) return
+
+    var length = e.target.value > 0 ? e.target.value : 1
+    selectedPallet.style.width = length * 100 + "px"
+    pallets[selectedPallet.id].length = length
+    selectedPallet.children[2].firstChild.innerText = length + "m"
+    setLocalObject('pallets', pallets)
+}
+
+const updatePalletWidth = e => {
+    if (!isPalletSelected(e)) return
+
+    var width = e.target.value > 0 ? e.target.value : 1
+    selectedPallet.style.height = width * 100 + "px"
+    pallets[selectedPallet.id].width = width
+    selectedPallet.children[1].firstChild.innerText = width + "m"
+    setLocalObject('pallets', pallets)
+}
+
+const handleContainerChange = e => {
+    let type = e.target.value
+
+    containerPanel.innerHTML = ''
+    const container = generateContainer(containers[type].length, containers[type].width)
+
+    containerPanel.appendChild(container)
+    setLocalObject('container', type)
+}
+
+displayContainer()
 getPalletsSequence()
 getPalletsAndDisplay()
 
@@ -134,3 +218,7 @@ getPalletsAndDisplay()
 addPalletBtn.addEventListener('click', showAddPallet)
 addNewPallet.addEventListener('click', addNewPalletFct)
 cancelBtn.addEventListener('click', closeNewPalletPannel)
+palletName.addEventListener('input', updatePalletName)
+palletLength.addEventListener('input', updatePalletLength)
+palletWidth.addEventListener('input', updatePalletWidth)
+selectContainer.addEventListener('input', handleContainerChange)
