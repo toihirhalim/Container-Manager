@@ -12,46 +12,40 @@ const clearLocalStorage = () => {
     localStorage.clear()
 }
 
-const generatePallet = (pName, pLength, pWidth) => {
+const generateLine = (dimension, isSideLine) => {
+    const lineContainer = document.createElement('div')
+    const lineText = document.createElement('span')
+    const line = document.createElement('div')
+    const lineArrowStart = document.createElement('div')
+    const lineArrowEnd = document.createElement('div')
+
+    let lineType = isSideLine ? 'side' : 'bottom'
+
+    lineText.innerText = dimension + "m"
+
+    lineArrowStart.classList.add('arrow', 'arrow-start')
+    lineArrowEnd.classList.add('arrow', 'arrow-end')
+
+    lineContainer.classList.add('dimensions', lineType + '-line-container')
+    line.classList.add('line', lineType + '-line')
+
+    line.appendChild(lineArrowStart)
+    line.appendChild(lineArrowEnd)
+
+    lineContainer.appendChild(lineText)
+    lineContainer.appendChild(line)
+
+    return lineContainer
+}
+
+const generatePallet = (name, length, width) => {
     const newPallet = document.createElement('div')
     const p = document.createElement('p')
-    const sideLineContainer = document.createElement('div')
-    const bottomLineContainer = document.createElement('span')
-    const sideLineText = document.createElement('span')
-    const bottomLineText = document.createElement('div')
-    const sideLine = document.createElement('div')
-    const bottomLine = document.createElement('div')
-    const sideLineArrowStart = document.createElement('div')
-    const sideLineArrowEnd = document.createElement('div')
-    const bottomLineArrowStart = document.createElement('div')
-    const bottomLineArrowEnd = document.createElement('div')
     const closeIcon = document.createElement('img')
 
     // p
-    p.innerText = pName;
+    p.innerText = name;
     newPallet.appendChild(p)
-
-    // side line
-    sideLineContainer.classList.add('dimentions', 'side-line-container')
-    sideLineText.innerText = pWidth + 'm';
-    sideLineContainer.appendChild(sideLineText)
-    sideLine.classList.add('line', 'side-line')
-    sideLineArrowStart.classList.add('arrow', 'arrow-start')
-    sideLineArrowEnd.classList.add('arrow', 'arrow-end')
-    sideLine.appendChild(sideLineArrowStart)
-    sideLine.appendChild(sideLineArrowEnd)
-    sideLineContainer.appendChild(sideLine)
-
-    // bottom line
-    bottomLineContainer.classList.add('dimentions', 'bottom-line-container')
-    bottomLineText.innerText = pLength + 'm';
-    bottomLineContainer.appendChild(bottomLineText)
-    bottomLine.classList.add('line', 'bottom-line')
-    bottomLineArrowStart.classList.add('arrow', 'arrow-start')
-    bottomLineArrowEnd.classList.add('arrow', 'arrow-end')
-    bottomLine.appendChild(bottomLineArrowStart)
-    bottomLine.appendChild(bottomLineArrowEnd)
-    bottomLineContainer.appendChild(bottomLine)
 
     //close icon
     closeIcon.src = 'images/cancel.png'
@@ -59,13 +53,26 @@ const generatePallet = (pName, pLength, pWidth) => {
     closeIcon.addEventListener('click', deletePallet)
 
     // pallet
-    newPallet.id = pName
+    newPallet.id = name
     newPallet.classList.add('pallet')
-    newPallet.style.width = pLength * 100 + 'px'
-    newPallet.style.height = pWidth * 100 + 'px'
-    newPallet.appendChild(sideLineContainer)
-    newPallet.appendChild(bottomLineContainer)
+    newPallet.style.width = length * 100 + 'px'
+    newPallet.style.height = width * 100 + 'px'
+    newPallet.appendChild(generateLine(width, true))
+    newPallet.appendChild(generateLine(length, false))
     newPallet.appendChild(closeIcon)
 
     return newPallet
+}
+
+const generateContainer = (length, width) => {
+    const container = document.createElement('div')
+
+    container.classList.add('container')
+    container.style.width = length * 100 + 'px'
+    container.style.height = width * 100 + 'px'
+
+    container.appendChild(generateLine(width, true))
+    container.appendChild(generateLine(length, false))
+
+    return container
 }
