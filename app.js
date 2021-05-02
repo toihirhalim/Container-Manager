@@ -134,7 +134,12 @@ const setSelected = e => {
         else target = target.parentNode
     }
 
+    if (selectedPallet)
+        selectedPallet.style.borderColor = 'rgb(51, 52, 54)'
+
     selectedPallet = target
+    selectedPallet.style.borderColor = 'rgb(157, 50, 10)'
+
     var pallet = pallets[selectedPallet.id]
 
     palletName.value = selectedPallet.id
