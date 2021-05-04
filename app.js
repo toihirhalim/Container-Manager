@@ -37,12 +37,22 @@ var pallets = {}
 
 var selectedPallet = null
 const displayContainer = () => {
+    const container = document.createElement('div')
     let type = getLocalObject('container')
-    if (!type) type = '20ft'
-    const container = generateContainer(containers[type].length, containers[type].width)
 
-    containerPanel.appendChild(container)
+    if (!type) type = '20ft'
+    let ct = containers[type]
     selectContainer.value = type
+
+    container.classList.add('container')
+
+    containerPanel.style.width = ct.length * 100 + 'px'
+    containerPanel.style.height = ct.width * 100 + 'px'
+
+    containerPanel.appendChild(generateLine(ct.width, true))
+    containerPanel.appendChild(container)
+    containerPanel.appendChild(generateLine(ct.length, false))
+
 }
 
 const getPalletsAndDisplay = () => {
@@ -203,10 +213,13 @@ const updatePalletWidth = e => {
 const handleContainerChange = e => {
     let type = e.target.value
 
-    containerPanel.innerHTML = ''
-    const container = generateContainer(containers[type].length, containers[type].width)
+    let ct = containers[type]
 
-    containerPanel.appendChild(container)
+    containerPanel.style.width = ct.length * 100 + 'px'
+    containerPanel.style.height = ct.width * 100 + 'px'
+    containerPanel.firstChild.firstChild.innerText = ct.width + 'm'
+    containerPanel.lastChild.firstChild.innerText = ct.length + 'm'
+
     setLocalObject('container', type)
 }
 

@@ -68,16 +68,3 @@ const generatePallet = (name, length, width) => {
 
     return newPallet
 }
-
-const generateContainer = (length, width) => {
-    const container = document.createElement('div')
-
-    container.classList.add('container')
-    container.style.width = length * 100 + 'px'
-    container.style.height = width * 100 + 'px'
-
-    container.appendChild(generateLine(width, true))
-    container.appendChild(generateLine(length, false))
-
-    return container
-}
