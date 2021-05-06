@@ -134,6 +134,14 @@ const deletePallet = e => {
 
     palletContainer.removeChild(pallet)
 
+    // if this pallet is the selected one to modify we clear the inputs in the top bar
+    if (pallet.isEqualNode(selectedPallet)) {
+        selectedPallet = null;
+        palletName.value = ''
+        palletLength.value = ''
+        palletWidth.value = ''
+    }
+
     delete pallets[pallet.id]
 
     setLocalObject('pallets', pallets)
@@ -147,6 +155,10 @@ const deletePallet = e => {
 
 const setSelected = e => {
     var target = e.target
+
+    //not do anything if we deleting the pallet
+    if (target.classList.contains('close'))
+        return;
 
     while (true) {
         if (target.id) break
