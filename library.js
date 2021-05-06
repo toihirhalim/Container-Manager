@@ -66,5 +66,41 @@ const generatePallet = (name, length, width) => {
     newPallet.addEventListener('mouseleave', hideCloseIcon)
     newPallet.addEventListener('click', setSelected)
 
+    dragElement(newPallet)
+
     return newPallet
+}
+
+function dragElement(elmnt) {
+    var MouseRelPosX = 0, mouseRelPosY = 0;
+
+    elmnt.onmousedown = dragMouseDown;
+
+    function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        //make the position absolute
+        elmnt.style.position = 'absolute';
+        elmnt.style.zIndex = 1;
+
+        MouseRelPosX = e.pageX - elmnt.offsetLeft;
+        mouseRelPosY = e.pageY - elmnt.offsetTop;
+
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+
+        elmnt.style.top = e.clientY - mouseRelPosY + "px";
+        elmnt.style.left = e.clientX - MouseRelPosX + "px";
+    }
+
+    function closeDragElement() {
+        /* stop moving when mouse button is released:*/
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
 }
