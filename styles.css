@@ -103,7 +103,7 @@ header{
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     padding: 15px;
     display: none;
-    z-index: 1;
+    z-index: 2;
 }
 
 .add-new-pallet button {
@@ -232,15 +232,11 @@ header{
     width: 100%;
     position: relative;
     overflow: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .container-panel{
     position: relative;
-    
-    margin-left: 50px;
+    margin: 60px;
 }
 
 .select-container{

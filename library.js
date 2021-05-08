@@ -73,5 +73,56 @@ const generatePallet = (name, length, width) => {
     newPallet.addEventListener('mouseleave', hideIcons)
     newPallet.addEventListener('click', setSelected)
 
+    dragElement(newPallet)
+
     return newPallet
+}
+
+function dragElement(elmnt) {
+    var mouseRelPosX = 0, mouseRelPosY = 0, x = 0, y = 0;
+
+    elmnt.onmousedown = dragMouseDown;
+
+    function dragMouseDown(e) {
+        e = e || window.event;
+
+        // delete on close 
+        if (e.target.classList.contains('close')) {
+            deletePallet(e);
+            return;
+        }
+
+        // on rotate click
+        if (e.target.classList.contains('rotate')) {
+            //rotatePallet();
+            return;
+        }
+
+        e.preventDefault();
+        //make the position absolute
+        elmnt.style.position = 'absolute';
+        elmnt.style.zIndex = 1;
+
+        mouseRelPosX = e.pageX - elmnt.offsetLeft;
+        mouseRelPosY = e.pageY - elmnt.offsetTop;
+
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        x = e.clientX - mouseRelPosX;
+        y = e.clientY - mouseRelPosY;
+        elmnt.style.top = y + "px";
+        elmnt.style.left = x + "px";
+    }
+
+    function closeDragElement(e) {
+        /* stop moving when mouse button is released:*/
+        dropped(e, elmnt, x, y)
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
 }
