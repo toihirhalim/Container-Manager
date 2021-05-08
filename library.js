@@ -78,6 +78,19 @@ function dragElement(elmnt) {
 
     function dragMouseDown(e) {
         e = e || window.event;
+
+        // delete on close 
+        if (e.target.classList.contains('close')) {
+            deletePallet(e);
+            return;
+        }
+
+        // on rotate click
+        if (e.target.classList.contains('rotate')) {
+            //rotatePallet();
+            return;
+        }
+
         e.preventDefault();
         //make the position absolute
         elmnt.style.position = 'absolute';
@@ -98,8 +111,9 @@ function dragElement(elmnt) {
         elmnt.style.left = e.clientX - mouseRelPosX + "px";
     }
 
-    function closeDragElement() {
+    function closeDragElement(e) {
         /* stop moving when mouse button is released:*/
+        dropped(e, elmnt)
         document.onmouseup = null;
         document.onmousemove = null;
     }
