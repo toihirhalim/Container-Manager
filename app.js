@@ -37,12 +37,22 @@ var pallets = {}
 
 var selectedPallet = null
 const displayContainer = () => {
+    const container = document.createElement('div')
     let type = getLocalObject('container')
-    if (!type) type = '20ft'
-    const container = generateContainer(containers[type].length, containers[type].width)
 
-    containerPanel.appendChild(container)
+    if (!type) type = '20ft'
+    let ct = containers[type]
     selectContainer.value = type
+
+    container.classList.add('container')
+
+    containerPanel.style.width = ct.length * 100 + 'px'
+    containerPanel.style.height = ct.width * 100 + 'px'
+
+    containerPanel.appendChild(generateLine(ct.width, true))
+    containerPanel.appendChild(container)
+    containerPanel.appendChild(generateLine(ct.length, false))
+
 }
 
 const getPalletsAndDisplay = () => {
@@ -55,6 +65,13 @@ const getPalletsAndDisplay = () => {
             const newPallet = generatePallet(key, pallet.length, pallet.width)
 
             pailletContainer.appendChild(newPallet)
+
+            if (pallet.position) {
+                newPallet.style.position = 'absolute'
+                newPallet.style.left = pallet.position.x + "px"
+                newPallet.style.top = pallet.position.y + 'px'
+                newPallet.style.zIndex = 1
+            }
         });
     }
 }
@@ -110,12 +127,14 @@ const clearInputs = () => {
     addNewPallet.disabled = false
 }
 
-const showCloseIcon = e => {
-    e.target.lastChild.style.display = 'block'
+const showIcons = pallet => {
+    pallet.children[3].style.display = 'block'
+    pallet.children[4].style.display = 'block'
 }
 
-const hideCloseIcon = e => {
-    e.target.lastChild.style.display = 'none'
+const hideIcons = pallet => {
+    pallet.children[3].style.display = 'none'
+    pallet.children[4].style.display = 'none'
 }
 
 const deletePallet = e => {
@@ -123,6 +142,14 @@ const deletePallet = e => {
     const palletContainer = pallet.parentNode
 
     palletContainer.removeChild(pallet)
+
+    // if this pallet is the selected one to modify we clear the inputs in the top bar
+    if (pallet.isEqualNode(selectedPallet)) {
+        selectedPallet = null;
+        palletName.value = ''
+        palletLength.value = ''
+        palletWidth.value = ''
+    }
 
     delete pallets[pallet.id]
 
@@ -135,8 +162,29 @@ const deletePallet = e => {
 
 }
 
+const rotatePallet = e => {
+    const pallet = e.target.parentNode
+    let dimension = pallets[pallet.id]
+
+    var tmp = dimension.length
+    dimension.length = dimension.width
+    dimension.width = tmp
+
+    pallet.style.width = dimension.length * 100 + "px"
+    pallet.children[2].firstChild.innerText = dimension.length + "m"
+
+    pallet.style.height = dimension.width * 100 + "px"
+    pallet.children[1].firstChild.innerText = dimension.width + "m"
+
+    setLocalObject('pallets', pallets)
+}
+
 const setSelected = e => {
     var target = e.target
+
+    //not do anything if we deleting the pallet
+    if (target.classList.contains('close'))
+        return;
 
     while (true) {
         if (target.id) break
@@ -203,11 +251,20 @@ const updatePalletWidth = e => {
 const handleContainerChange = e => {
     let type = e.target.value
 
-    containerPanel.innerHTML = ''
-    const container = generateContainer(containers[type].length, containers[type].width)
+    let ct = containers[type]
 
-    containerPanel.appendChild(container)
+    containerPanel.style.width = ct.length * 100 + 'px'
+    containerPanel.style.height = ct.width * 100 + 'px'
+    containerPanel.firstChild.firstChild.innerText = ct.width + 'm'
+    containerPanel.lastChild.firstChild.innerText = ct.length + 'm'
+
     setLocalObject('container', type)
+}
+
+const dropped = (e, pallet, x, y) => {
+    pallets[pallet.id]['position'] = { x, y }
+
+    setLocalObject('pallets', pallets)
 }
 
 displayContainer()
