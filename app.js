@@ -157,6 +157,19 @@ const deletePallet = e => {
 
 const rotatePallet = e => {
     const pallet = e.target.parentNode
+    let dimension = pallets[pallet.id]
+
+    var tmp = dimension.length
+    dimension.length = dimension.width
+    dimension.width = tmp
+
+    pallet.style.width = dimension.length * 100 + "px"
+    pallet.children[2].firstChild.innerText = dimension.length + "m"
+
+    pallet.style.height = dimension.width * 100 + "px"
+    pallet.children[1].firstChild.innerText = dimension.width + "m"
+
+    setLocalObject('pallets', pallets)
 }
 
 const setSelected = e => {
