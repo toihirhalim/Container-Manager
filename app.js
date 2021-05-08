@@ -120,12 +120,14 @@ const clearInputs = () => {
     addNewPallet.disabled = false
 }
 
-const showCloseIcon = e => {
-    e.target.lastChild.style.display = 'block'
+const showIcons = e => {
+    e.target.children[3].style.display = 'block'
+    e.target.children[4].style.display = 'block'
 }
 
-const hideCloseIcon = e => {
-    e.target.lastChild.style.display = 'none'
+const hideIcons = e => {
+    e.target.children[3].style.display = 'none'
+    e.target.children[4].style.display = 'none'
 }
 
 const deletePallet = e => {
@@ -151,6 +153,10 @@ const deletePallet = e => {
         setLocalObject('palletsSequence', palletsSequence)
     }
 
+}
+
+const rotatePallet = e => {
+    const pallet = e.target.parentNode
 }
 
 const setSelected = e => {

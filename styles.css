@@ -208,8 +208,19 @@ header{
     z-index: 2;
     width: 20px;
 }
-.close:hover{
+.close:hover, .rotate:hover{
     cursor: pointer;
+}
+
+.rotate{
+    position: absolute;
+    background-color: rgb(243, 241, 241);
+    border-radius: 60%;
+    display: none;
+    top: -12px;
+    left: -12px;
+    z-index: 2;
+    width: 20px;
 }
 
 
