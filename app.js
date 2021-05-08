@@ -65,6 +65,13 @@ const getPalletsAndDisplay = () => {
             const newPallet = generatePallet(key, pallet.length, pallet.width)
 
             pailletContainer.appendChild(newPallet)
+
+            if (pallet.position) {
+                newPallet.style.position = 'absolute'
+                newPallet.style.left = pallet.position.x + "px"
+                newPallet.style.top = pallet.position.y + 'px'
+                newPallet.style.zIndex = "1"
+            }
         });
     }
 }
@@ -233,6 +240,12 @@ const handleContainerChange = e => {
     containerPanel.lastChild.firstChild.innerText = ct.length + 'm'
 
     setLocalObject('container', type)
+}
+
+const dropped = (e, pallet, x, y) => {
+    pallets[pallet.id]['position'] = { x, y }
+
+    setLocalObject('pallets', pallets)
 }
 
 displayContainer()

@@ -72,7 +72,7 @@ const generatePallet = (name, length, width) => {
 }
 
 function dragElement(elmnt) {
-    var mouseRelPosX = 0, mouseRelPosY = 0;
+    var mouseRelPosX = 0, mouseRelPosY = 0, x = 0, y = 0;
 
     elmnt.onmousedown = dragMouseDown;
 
@@ -106,14 +106,15 @@ function dragElement(elmnt) {
     function elementDrag(e) {
         e = e || window.event;
         e.preventDefault();
-
-        elmnt.style.top = e.clientY - mouseRelPosY + "px";
-        elmnt.style.left = e.clientX - mouseRelPosX + "px";
+        x = e.clientX - mouseRelPosX;
+        y = e.clientY - mouseRelPosY;
+        elmnt.style.top = y + "px";
+        elmnt.style.left = x + "px";
     }
 
     function closeDragElement(e) {
         /* stop moving when mouse button is released:*/
-        dropped(e, elmnt)
+        dropped(e, elmnt, x, y)
         document.onmouseup = null;
         document.onmousemove = null;
     }
