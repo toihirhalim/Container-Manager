@@ -42,6 +42,7 @@ const generatePallet = (name, length, width) => {
     const newPallet = document.createElement('div')
     const p = document.createElement('p')
     const closeIcon = document.createElement('img')
+    const rotateIcon = document.createElement('img')
 
     // p
     p.innerText = name;
@@ -52,6 +53,11 @@ const generatePallet = (name, length, width) => {
     closeIcon.classList.add('close')
     closeIcon.addEventListener('click', deletePallet)
 
+    //rotate icon
+    rotateIcon.src = 'images/rotate.png'
+    rotateIcon.classList.add('rotate')
+    rotateIcon.addEventListener('click', rotatePallet)
+
     // pallet
     newPallet.id = name
     newPallet.classList.add('pallet')
@@ -60,10 +66,11 @@ const generatePallet = (name, length, width) => {
     newPallet.appendChild(generateLine(width, true))
     newPallet.appendChild(generateLine(length, false))
     newPallet.appendChild(closeIcon)
+    newPallet.appendChild(rotateIcon)
 
     //event listenners
-    newPallet.addEventListener('mouseenter', showCloseIcon)
-    newPallet.addEventListener('mouseleave', hideCloseIcon)
+    newPallet.addEventListener('mouseenter', showIcons)
+    newPallet.addEventListener('mouseleave', hideIcons)
     newPallet.addEventListener('click', setSelected)
 
     return newPallet
