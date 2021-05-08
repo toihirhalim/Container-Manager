@@ -69,8 +69,8 @@ const generatePallet = (name, length, width) => {
     newPallet.appendChild(rotateIcon)
 
     //event listenners
-    newPallet.addEventListener('mouseenter', showIcons)
-    newPallet.addEventListener('mouseleave', hideIcons)
+    newPallet.addEventListener('mouseenter', e => showIcons(e.target))
+    newPallet.addEventListener('mouseleave', e => hideIcons(e.target))
     newPallet.addEventListener('click', setSelected)
 
     dragElement(newPallet)
@@ -99,6 +99,10 @@ function dragElement(elmnt) {
         }
 
         e.preventDefault();
+
+        //hide close and rotate icons
+        hideIcons(elmnt);
+
         //make the position absolute
         elmnt.style.position = 'absolute';
         elmnt.style.zIndex = 1;
@@ -122,6 +126,10 @@ function dragElement(elmnt) {
     function closeDragElement(e) {
         /* stop moving when mouse button is released:*/
         dropped(e, elmnt, x, y)
+
+        //reshow close and rotate icons
+        showIcons(elmnt);
+
         document.onmouseup = null;
         document.onmousemove = null;
     }

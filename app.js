@@ -70,7 +70,7 @@ const getPalletsAndDisplay = () => {
                 newPallet.style.position = 'absolute'
                 newPallet.style.left = pallet.position.x + "px"
                 newPallet.style.top = pallet.position.y + 'px'
-                newPallet.style.zIndex = "1"
+                newPallet.style.zIndex = 1
             }
         });
     }
@@ -127,14 +127,14 @@ const clearInputs = () => {
     addNewPallet.disabled = false
 }
 
-const showIcons = e => {
-    e.target.children[3].style.display = 'block'
-    e.target.children[4].style.display = 'block'
+const showIcons = pallet => {
+    pallet.children[3].style.display = 'block'
+    pallet.children[4].style.display = 'block'
 }
 
-const hideIcons = e => {
-    e.target.children[3].style.display = 'none'
-    e.target.children[4].style.display = 'none'
+const hideIcons = pallet => {
+    pallet.children[3].style.display = 'none'
+    pallet.children[4].style.display = 'none'
 }
 
 const deletePallet = e => {
