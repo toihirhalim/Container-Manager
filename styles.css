@@ -221,15 +221,11 @@ header{
     width: 100%;
     position: relative;
     overflow: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .container-panel{
     position: relative;
-    
-    margin-left: 50px;
+    margin: 60px;
 }
 
 .select-container{

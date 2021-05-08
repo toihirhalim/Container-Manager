@@ -72,7 +72,7 @@ const generatePallet = (name, length, width) => {
 }
 
 function dragElement(elmnt) {
-    var MouseRelPosX = 0, mouseRelPosY = 0;
+    var mouseRelPosX = 0, mouseRelPosY = 0;
 
     elmnt.onmousedown = dragMouseDown;
 
@@ -83,7 +83,7 @@ function dragElement(elmnt) {
         elmnt.style.position = 'absolute';
         elmnt.style.zIndex = 1;
 
-        MouseRelPosX = e.pageX - elmnt.offsetLeft;
+        mouseRelPosX = e.pageX - elmnt.offsetLeft;
         mouseRelPosY = e.pageY - elmnt.offsetTop;
 
         document.onmouseup = closeDragElement;
@@ -95,7 +95,7 @@ function dragElement(elmnt) {
         e.preventDefault();
 
         elmnt.style.top = e.clientY - mouseRelPosY + "px";
-        elmnt.style.left = e.clientX - MouseRelPosX + "px";
+        elmnt.style.left = e.clientX - mouseRelPosX + "px";
     }
 
     function closeDragElement() {
