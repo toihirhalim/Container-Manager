@@ -230,7 +230,6 @@ header{
 
 .container-side{
     width: 100%;
-    position: relative;
     overflow: auto;
 }
 
