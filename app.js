@@ -50,9 +50,15 @@ const displayContainer = () => {
     containerPanel.style.width = ct.length * 100 + 'px'
     containerPanel.style.height = ct.width * 100 + 'px'
 
-    containerPanel.appendChild(generateLine(ct.width, true))
+    const sideLine = generateLine(ct.width, true)
+    const bottomLine = generateLine(ct.width, false)
+
+    sideLine.classList.add('container-side-line')
+    bottomLine.classList.add('container-side-line')
+
+    containerPanel.appendChild(sideLine)
     containerPanel.appendChild(container)
-    containerPanel.appendChild(generateLine(ct.length, false))
+    containerPanel.appendChild(bottomLine)
 
 }
 
@@ -278,7 +284,6 @@ const addToContainer = (e, elmnt, x, y) => {
 
     elmnt.style.top = y - 110 + 'px'
     elmnt.style.left = x - 230 + 'px'
-
 }
 
 displayContainer()
