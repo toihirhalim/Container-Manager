@@ -71,7 +71,7 @@ header{
 
 .sidebar{
     height: 100%;
-    width: 15vw;
+    width: 200px;
     background-color: rgb(206, 209, 212);
 }
 
@@ -121,9 +121,9 @@ header{
 -------------*/
 
 .pallet{
-    background-color: rgb(109, 113, 117);
+    background-color: rgba(109, 113, 117, 0.7);
     margin: 5px;
-    border: 1px solid rgb(52, 54, 51);
+    border: 2px solid rgb(52, 54, 51);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -230,7 +230,6 @@ header{
 
 .container-side{
     width: 100%;
-    position: relative;
     overflow: auto;
 }
 
@@ -258,9 +257,9 @@ header{
     position: relative;
 }
 
-.container-panel .side-line-container{
+.container-panel .container-side-line{
     left: -50px;
 }
-.container-panel .bottom-line-container{
+.container-panel .container-side-line{
     top: -30px;
 }

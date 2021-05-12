@@ -94,7 +94,6 @@ function dragElement(elmnt) {
 
         // on rotate click
         if (e.target.classList.contains('rotate')) {
-            //rotatePallet();
             return;
         }
 
@@ -104,8 +103,10 @@ function dragElement(elmnt) {
         hideIcons(elmnt);
 
         //make the position absolute
-        elmnt.style.position = 'absolute';
-        elmnt.style.zIndex = 1;
+        if (elmnt.style.position != 'absolute') {
+            elmnt.style.position = 'absolute';
+            elmnt.style.zIndex = 1;
+        }
 
         mouseRelPosX = e.pageX - elmnt.offsetLeft;
         mouseRelPosY = e.pageY - elmnt.offsetTop;
@@ -125,6 +126,11 @@ function dragElement(elmnt) {
 
     function closeDragElement(e) {
         /* stop moving when mouse button is released:*/
+
+        if (elmnt.parentNode.id == 'pailletContainer') {
+            addToContainer(e, elmnt, x, y)
+        }
+
         dropped(e, elmnt, x, y)
 
         //reshow close and rotate icons

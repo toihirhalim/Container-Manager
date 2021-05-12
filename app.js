@@ -11,6 +11,7 @@ const palletLength = document.getElementById('palletLength')
 const palletWidth = document.getElementById('palletWidth')
 const containerPanel = document.getElementById('containerPanel')
 const selectContainer = document.getElementById('selectContainer')
+var container;
 
 var palletsSequence = 1;
 
@@ -37,7 +38,7 @@ var pallets = {}
 
 var selectedPallet = null
 const displayContainer = () => {
-    const container = document.createElement('div')
+    container = document.createElement('div')
     let type = getLocalObject('container')
 
     if (!type) type = '20ft'
@@ -49,9 +50,15 @@ const displayContainer = () => {
     containerPanel.style.width = ct.length * 100 + 'px'
     containerPanel.style.height = ct.width * 100 + 'px'
 
-    containerPanel.appendChild(generateLine(ct.width, true))
+    const sideLine = generateLine(ct.width, true)
+    const bottomLine = generateLine(ct.width, false)
+
+    sideLine.classList.add('container-side-line')
+    bottomLine.classList.add('container-side-line')
+
+    containerPanel.appendChild(sideLine)
     containerPanel.appendChild(container)
-    containerPanel.appendChild(generateLine(ct.length, false))
+    containerPanel.appendChild(bottomLine)
 
 }
 
@@ -64,13 +71,15 @@ const getPalletsAndDisplay = () => {
             let pallet = pallets[key]
             const newPallet = generatePallet(key, pallet.length, pallet.width)
 
-            pailletContainer.appendChild(newPallet)
-
             if (pallet.position) {
                 newPallet.style.position = 'absolute'
                 newPallet.style.left = pallet.position.x + "px"
                 newPallet.style.top = pallet.position.y + 'px'
                 newPallet.style.zIndex = 1
+
+                container.appendChild(newPallet)
+            } else {
+                pailletContainer.appendChild(newPallet)
             }
         });
     }
@@ -265,6 +274,16 @@ const dropped = (e, pallet, x, y) => {
     pallets[pallet.id]['position'] = { x, y }
 
     setLocalObject('pallets', pallets)
+}
+
+const addToContainer = (e, elmnt, x, y) => {
+    pailletContainer.removeChild(elmnt)
+    container.appendChild(elmnt)
+
+    elmnt.style.margin = 0 + 'px'
+
+    elmnt.style.top = y - 110 + 'px'
+    elmnt.style.left = x - 230 + 'px'
 }
 
 displayContainer()
