@@ -127,11 +127,13 @@ function dragElement(elmnt) {
     function closeDragElement(e) {
         /* stop moving when mouse button is released:*/
 
+        let position = { x, y };
+
         if (elmnt.parentNode.id == 'pailletContainer') {
-            addToContainer(e, elmnt, x, y)
+            position = addToContainer(elmnt, x, y)
         }
 
-        dropped(e, elmnt, x, y)
+        dropped(elmnt, position.x, position.y)
 
         //reshow close and rotate icons
         showIcons(elmnt);

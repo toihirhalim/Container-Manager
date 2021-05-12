@@ -11,6 +11,8 @@ const palletLength = document.getElementById('palletLength')
 const palletWidth = document.getElementById('palletWidth')
 const containerPanel = document.getElementById('containerPanel')
 const selectContainer = document.getElementById('selectContainer')
+const containerSide = document.getElementById('containerSide')
+
 var container;
 
 var palletsSequence = 1;
@@ -73,6 +75,7 @@ const getPalletsAndDisplay = () => {
 
             if (pallet.position) {
                 newPallet.style.position = 'absolute'
+                newPallet.style.margin = 0 + 'px'
                 newPallet.style.left = pallet.position.x + "px"
                 newPallet.style.top = pallet.position.y + 'px'
                 newPallet.style.zIndex = 1
@@ -270,20 +273,25 @@ const handleContainerChange = e => {
     setLocalObject('container', type)
 }
 
-const dropped = (e, pallet, x, y) => {
+const dropped = (pallet, x, y) => {
     pallets[pallet.id]['position'] = { x, y }
 
     setLocalObject('pallets', pallets)
 }
 
-const addToContainer = (e, elmnt, x, y) => {
+const addToContainer = (elmnt, x, y) => {
     pailletContainer.removeChild(elmnt)
     container.appendChild(elmnt)
 
+    x -= 230 + containerSide.scrollLeft
+    y -= 110
+
     elmnt.style.margin = 0 + 'px'
 
-    elmnt.style.top = y - 110 + 'px'
-    elmnt.style.left = x - 230 + 'px'
+    elmnt.style.top = y + 'px'
+    elmnt.style.left = x + 'px'
+
+    return { x, y }
 }
 
 displayContainer()
