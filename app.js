@@ -53,10 +53,10 @@ const displayContainer = () => {
     containerPanel.style.height = ct.width * 100 + 'px'
 
     const sideLine = generateLine(ct.width, true)
-    const bottomLine = generateLine(ct.width, false)
+    const bottomLine = generateLine(ct.length, false)
 
     sideLine.classList.add('container-side-line')
-    bottomLine.classList.add('container-side-line')
+    bottomLine.classList.add('container-bottom-line')
 
     containerPanel.appendChild(sideLine)
     containerPanel.appendChild(container)
