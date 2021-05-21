@@ -56,7 +56,7 @@ const displayContainer = () => {
     const bottomLine = generateLine(ct.length, false)
 
     sideLine.classList.add('container-side-line')
-    bottomLine.classList.add('container-side-line')
+    bottomLine.classList.add('container-bottom-line')
 
     containerPanel.appendChild(sideLine)
     containerPanel.appendChild(container)
